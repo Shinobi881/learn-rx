@@ -464,25 +464,23 @@ function concatMap() {
 	//	 {"id": 70111470,"title": "Die Hard","boxart":"http://cdn-0.nflximg.com/images/2891/DieHard150.jpg" }
 	// ];
 
-  const newMovies = movieLists.map(({ videos }) => videos).concatAll();
-  const testMovies = newMovies.map(video => {
-    const { id, title, boxarts } = video;
-    // console.log(id, title, boxarts);
-    const newShit = boxarts
-      .filter(({ width }) => width === 150)
-      .map(({ url: boxart }) => ({ id, title, boxart }));
-      
-    return newShit;
-    
-  }).concatAll();
+  return movieLists.map(({ videos }) => videos).concatAll()
+    .map(video => {
+      const { id, title, boxarts } = video;
+      // console.log(id, title, boxarts);
+      const newShit = boxarts
+        .filter(({ width }) => width === 150)
+        .map(({ url: boxart }) => ({ id, title, boxart }));
+        
+      return newShit;      
+    }).concatAll();
   
-  console.log(testMovies);
           
   
   return newMovies; // Complete this expression!
 }
 
-concatMap();
+// concatMap();
 
 /*
   Exercise 13: Implement concatMap()
@@ -492,15 +490,27 @@ concatMap();
 Array.prototype.concatMap = function(projectionFunctionThatReturnsArray) {
 	return this.
 		map(function(item) {
+      // console.log();
+      console.log(projectionFunctionThatReturnsArray(item));
 			// ------------   INSERT CODE HERE!  ----------------------------
 			// Apply the projection function to each item. The projection
 			// function will return a new child array. This will create a
 			// two-dimensional array.
 			// ------------   INSERT CODE HERE!  ----------------------------
-		}).
+      return projectionFunctionThatReturnsArray(item);
+		}).concatAll();
 		// apply the concatAll function to flatten the two-dimensional array
-		concatAll();
 };
+
+var spanishFrenchEnglishWords = [ ["cero","rien","zero"], ["uno","un","one"], ["dos","deux","two"] ];
+	// collect all the words for each number, in every language, in a single, flat list
+	var allWords = [0,1,2].
+		concatMap(function(index) {
+			return spanishFrenchEnglishWords[index];
+		});
+    
+  console.log(allWords);
+
 
 /*
   Exercise 14: Use concatMap() to retrieve id, title, and 150x200 box art url for every video
@@ -579,3 +589,5 @@ function multipleConcatMap() {
 	return movieLists // Complete this expression!
 
 }
+
+multipleConcatMap();
