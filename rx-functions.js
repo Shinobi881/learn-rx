@@ -490,8 +490,6 @@ function concatMap() {
 Array.prototype.concatMap = function(projectionFunctionThatReturnsArray) {
 	return this.
 		map(function(item) {
-      // console.log();
-      console.log(projectionFunctionThatReturnsArray(item));
 			// ------------   INSERT CODE HERE!  ----------------------------
 			// Apply the projection function to each item. The projection
 			// function will return a new child array. This will create a
@@ -502,14 +500,14 @@ Array.prototype.concatMap = function(projectionFunctionThatReturnsArray) {
 		// apply the concatAll function to flatten the two-dimensional array
 };
 
-var spanishFrenchEnglishWords = [ ["cero","rien","zero"], ["uno","un","one"], ["dos","deux","two"] ];
-	// collect all the words for each number, in every language, in a single, flat list
-	var allWords = [0,1,2].
-		concatMap(function(index) {
-			return spanishFrenchEnglishWords[index];
-		});
+// var spanishFrenchEnglishWords = [ ["cero","rien","zero"], ["uno","un","one"], ["dos","deux","two"] ];
+// 	// collect all the words for each number, in every language, in a single, flat list
+// 	var allWords = [0,1,2].
+// 		concatMap(function(index) {
+// 			return spanishFrenchEnglishWords[index];
+// 		});
     
-  console.log(allWords);
+  // console.log(allWords);
 
 
 /*
@@ -585,9 +583,21 @@ function multipleConcatMap() {
 	//	 {"id": 654356453, "title": "Bad Boys", "boxart": "http://cdn-0.nflximg.com/images/2891/BadBoys150.jpg" },
 	//	 {"id": 70111470, "title": "Die Hard", "boxart": "http://cdn-0.nflximg.com/images/2891/DieHard150.jpg" }
 	// ];
-
-	return movieLists // Complete this expression!
+  
+  const newMovies = movieLists.concatMap(({ videos }) => {
+    return videos.concatMap(video => {
+      const { id, title, boxarts } = video;
+      
+      return boxarts
+        .filter(({ width }) => width === 150)
+        .map(({ url: boxart }) => {
+          return { id, title, boxart };
+        });
+    });
+  });
+  
+	return newMovies // Complete this expression!
 
 }
 
-multipleConcatMap();
+console.log(multipleConcatMap());
