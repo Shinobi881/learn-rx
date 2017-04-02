@@ -600,7 +600,7 @@ function multipleConcatMap() {
 
 }
 
-console.log(multipleConcatMap());
+// console.log(multipleConcatMap());
 /*
   Reducing Arrays
   Sometimes we need to perform an operation on more than one item in the array at the same time. For example, let's say we need to find the largest integer in an array. We can't use a filter() operation, because it only examines one item at a time. To find the largest integer we need to compare items in the array to each other.
@@ -692,6 +692,16 @@ function reduceRating() {
 	// You should return an array containing only the largest rating. Remember that reduce always
 	// returns an array with one item.
 	return ratings.
-		reduce   // Complete this expression
+		reduce((rating, nextRating) => {
+			let largestRating = 0;
+
+			if (nextRating > rating) {
+				largestRating = nextRating;
+			}
+			
+			return largestRating;
+		});  // Complete this expression
 }
+
+console.log(reduceRating());
 		
