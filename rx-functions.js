@@ -703,5 +703,37 @@ function reduceRating() {
 		});  // Complete this expression
 }
 
-console.log(reduceRating());
+/*
+Exercise 18: Retrieve url of the largest boxart
+
+Let's try combining reduce() with map() to reduce multiple boxart objects to a single value: the url of the largest box art.
+*/
+function reduceBoxarts() {
+	var boxarts = [
+			{ width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture200.jpg" },
+			{ width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture150.jpg" },
+			{ width: 300, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture300.jpg" },
+			{ width: 425, height: 150, url: "http://cdn-0.nflximg.com/images/2891/Fracture425.jpg" }
+		];
+
+	// You should return an array containing only the URL of the largest box art. Remember that reduce always
+	// returns an array with one item.
+	return boxarts.
+		reduce((current, next) => {
+			const { width: currentWidth, height: currentHeight } = current;
+			const { width: nextWidth, height: nextHeight } = next;
+			
+			let largestBoxart = current;
+			const currentSize = currentWidth + currentHeight;
+			const nextSize = nextWidth + nextHeight;
+			
+			if (nextSize > currentSize) {
+				largestBoxart = next;
+			}
+			
+			return largestBoxart;
+		}).map(art => art.url);   // Complete this expression
+}
+
+console.log(reduceBoxarts());
 		
