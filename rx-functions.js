@@ -902,8 +902,12 @@ function zip() {
 	counter,
 	videoIdAndBookmarkIdPairs = [];
 
-	for(counter = 0; counter < Math.min(videos.length, bookmarks.length); counter++) {
+	for (counter = 0; counter < Math.min(videos.length, bookmarks.length); counter++) {
 		// Insert code here to create a {videoId, bookmarkId} pair and add it to the videoIdAndBookmarkIdPairs array.
+		let videoId = videos[counter].id;
+		let bookmarkId = bookmarks[counter].id
+		
+		videoIdAndBookmarkIdPairs.push({ videoId, bookmarkId });
 	}
 
 	return videoIdAndBookmarkIdPairs;
