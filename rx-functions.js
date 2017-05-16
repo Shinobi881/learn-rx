@@ -926,8 +926,7 @@ smallest input array.
 */
 
 Array.zip = function(left, right, combinerFunction) {
-	var counter,
-		results = [];
+	let counter, results = [];
 
 	for(counter = 0; counter < Math.min(left.length, right.length); counter++) {
 		// Add code here to apply the combinerFunction to the left and right-hand items in the respective arrays
@@ -981,7 +980,9 @@ function zipVideos() {
 			{id: 445, time: 987834}
 		];
 
-	return Array.
-		zip( //... finish this expression
+	return Array.zip(videos, bookmarks, ({ id: videoId }, { id: bookmarkId }) => {
+		return { videoId, bookmarkId };
+	});
 }
-		
+
+console.log(zipVideos());
